@@ -1,0 +1,8 @@
+package Builder;
+
+public class Shop {
+    public static void main(String args[]){
+        Phone p= new PhoneBuilder().setOs("Android").setBattery(5200).getPhone();
+        System.out.println(p);
+    }
+}
