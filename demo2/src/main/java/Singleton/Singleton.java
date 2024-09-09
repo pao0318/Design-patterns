@@ -2,14 +2,33 @@ package Singleton;
 
 class ABC {
 
-    static ABC obj = new ABC();   // Eager
+    static ABC obj;   // Eager Lazy
     private ABC(){
-
+        System.out.println("Instance Created");
     }
-    public static ABC getInstance(){
+    public static synchronized ABC getInstance(){
+        if(obj==null)
+            obj = new ABC();
         return obj;
     }
 }
 public class Singleton {
-    ABC ob1 =  ABC.getInstance();
+    public static void main(String args[]){
+        Thread t1= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ABC obj = ABC.getInstance();
+            }
+        });
+        Thread t2= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ABC obj = ABC.getInstance();
+            }
+        });
+        t1.start();
+        t2.start();
+
+
+    }
 }
