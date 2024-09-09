@@ -2,13 +2,19 @@ package Singleton;
 
 class ABC {
 
-    static ABC obj;   // Eager Lazy
+    static ABC obj;
     private ABC(){
         System.out.println("Instance Created");
     }
-    public static synchronized ABC getInstance(){
-        if(obj==null)
-            obj = new ABC();
+    public static  ABC getInstance(){  // Enum
+        if(obj==null){
+            synchronized (ABC.class){
+                if(obj ==null)
+                    obj = new ABC();
+            }
+
+        }
+
         return obj;
     }
 }
